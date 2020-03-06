@@ -1,0 +1,20 @@
+{
+    "name": "najmul/domain-manager",
+    "description": "A plugin for managing domains",
+    "type": "wrdpresss-plugin",
+    "license": "GPLv2",
+    "authors":[
+        {
+            "name":"Najmul",
+            "email":"najmulamin45@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "Domain\\Manager\\":"includes/"
+        },
+        "files":[]
+    }
+}
