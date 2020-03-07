@@ -4,6 +4,8 @@ namespace Domain\Manager\Admin;
 
 class Domainlists{
 
+    public $errors = [];
+
     function domainlists(){
         $action = isset ($_GET['action']) ? $_GET['action']: 'list';
         switch($action){
@@ -37,7 +39,42 @@ class Domainlists{
         if(! current_user_can('manage_options')){
             wp_die('Are you Cheating ?');
         }
-        var_dump($_POST);
+
+        $domain_name = isset($_POST['domain_name']) ? sanitize_text_field($_POST['domain_name']) : '';
+        $priority = isset($_POST['priority']) ? sanitize_text_field($_POST['priority']) : '';
+        $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+        $description = isset($_POST['description']) ? sanitize_text_field($_POST['description']) : '';
+
+
+        if(empty($domain_name)){
+            $this->errors['domain_name'] = __('Please Provide a Domain Name' , 'domain-manager');
+
+        }
+        if(empty($priority)){
+            $this->errors['priority'] = __('Please Provide a Domain Name', 'domain-manager');
+
+        } 
+
+        if(!empty($this->errors)){
+            return;
+        }
+
+        $insert_id = wp_insert_data(
+           [
+            'domain_name' => $domain_name, 
+            'priority' => $priority,
+            'category' => $category,
+            'description' => $description,
+           ]
+        );
+       
+        if(is_wp_error($insert_id)){
+            wp_die($insert_id->get_error_message());
+        }
+        
+        $redirected_to = admin_url('admin.php?page=domain-manager&inserted=true');
+        wp_redirect($redirected_to);
         exit;
+
     }
 }

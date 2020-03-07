@@ -1,14 +1,16 @@
 <div class="wrap">
     <h1 class="wp-heading-inline"><?php _e('Add New Domain' , 'domain-manager') ?></h1>
 
+    <?php var_dump($this->errors); ?>
+
     <form action="" method="post">
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label for="domain-name"><?php _e('Domain Name','domain-manager') ?></label>
+                    <label for="domain_name"><?php _e('Domain Name','domain-manager') ?></label>
                 </th>
                 <td>
-                    <input type="text" name="domain-name" class="regular-text" value="" placeholder="Enter Domain Name">
+                    <input type="text" name="domain_name" class="regular-text" value="" placeholder="Enter Domain Name">
                 </td>
             </tr>
             <tr>
