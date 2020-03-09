@@ -1,5 +1,5 @@
 # Wordpress Domain Manager
-## A wordpress plugin for managing all of your domain.
+## A wordpress plugin for managing all of your domains.
 
  You can add Your domain names and set a priority level and you can also catagorize them based on availability. 
  
