@@ -26,10 +26,12 @@ class Installer{
         `priority` varchar(255) NOT NULL,
         `category` varchar(255) NULL,
         `created_by` varchar(255) NOT NULL,               
-        `description` varchar(500) DEFAULT NULL,
+        `description` varchar(500) NULL,
+        `status` varchar(255) NULL,
         `created_at` datetime NOT NULL,        
         PRIMARY KEY (`id`)
-        ) $charset_collate";
+        ) $charset_collate";      
+
     
         if(! function_exists('dbDelta')){
             require_once ABSPATH . 'wp-admin/includes/upgrade.php';

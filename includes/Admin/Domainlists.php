@@ -21,6 +21,11 @@ class Domainlists{
                 $template = __DIR__ . '/views/domain-list-view.php';
             break;
 
+            case 'check': 
+                $template = __DIR__ . '/views/domain-list-check.php';
+            break;
+
+
             default:
                  $template = __DIR__ . '/views/domain-list.php';
             break;
@@ -33,28 +38,27 @@ class Domainlists{
         if(! isset($_POST['submit_domain'])){
             return;
         }
+        //Protection from CSRF
         if(! wp_verify_nonce($_POST['_wpnonce'], 'new-domain')){
             wp_die('Are you Cheating ?');
         }
+        //  Check Only admin is Submitting the Form
         if(! current_user_can('manage_options')){
             wp_die('Are you Cheating ?');
         }
-
+        //Check Empty Value 
         $domain_name = isset($_POST['domain_name']) ? sanitize_text_field($_POST['domain_name']) : '';
         $priority = isset($_POST['priority']) ? sanitize_text_field($_POST['priority']) : '';
         $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
         $description = isset($_POST['description']) ? sanitize_text_field($_POST['description']) : '';
-
+        $status = isset($_POST['status']) ? sanitize_text_field($_POST['status']) : '';
 
         if(empty($domain_name)){
             $this->errors['domain_name'] = __('Please Provide a Domain Name' , 'domain-manager');
-
         }
         if(empty($priority)){
             $this->errors['priority'] = __('Please Provide a Domain Name', 'domain-manager');
-
         } 
-
         if(!empty($this->errors)){
             return;
         }
@@ -65,6 +69,7 @@ class Domainlists{
             'priority' => $priority,
             'category' => $category,
             'description' => $description,
+            'status' => $status,
            ]
         );
        

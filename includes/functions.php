@@ -11,6 +11,7 @@ function wp_insert_data($args = []){
         'category' => '',        
         'created_by' => get_current_user_id(),
         'description' => '',
+        'status' => '',
         'created_at' => current_time('mysql'),
     ];
     $data = wp_parse_args($args, $defaults);
@@ -25,10 +26,42 @@ function wp_insert_data($args = []){
             '%d',
             '%s',
             '%s',
+            '%s',
         ]
         );
     if(! $inserted ){
         return new \WP_Error('failed-to-insert', __('Failed ot Insert Data', 'domain-manager'));
     }
     return $wpdb->insert_id;
+}
+
+
+
+function wp_get_data($args = []){
+    global $wpdb;
+
+    $defaults = [
+        'number'  => 20,
+        'offset'  => 0,
+        'orderby' => 'id',
+        'order'   => 'ASC'
+    ];
+
+    $args = wp_parse_args( $args, $defaults );
+
+    $sql = $wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}domain_manager
+            ORDER BY {$args['orderby']} {$args['order']}
+            LIMIT %d, %d",
+            $args['offset'], $args['number']
+    );
+
+    $items = $wpdb->get_results( $sql );
+
+    return $items;
+}
+
+function wp_table_count(){
+    global $wpdb;
+    return (int) $wpdb->get_var("SELECT count(id) FROM {$wpdb->prefix}domain_manager");
 }

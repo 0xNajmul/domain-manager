@@ -19,11 +19,11 @@
                 </th>
                 <td>
                     <select class="" name="priority" id="priority">
-                        <option value="no">No</option>
-                        <option value="low">Low</option>
-                        <option value="basic" selected="selected">Basic</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>                        
+                        <option value="No">No</option>
+                        <option value="Low">Low</option>
+                        <option value="Basic" selected="selected">Basic</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>                        
                     </select>
                 </td>
             </tr>
@@ -32,12 +32,25 @@
                     <label for="category"><?php _e('Category','domain-manager') ?></label>
                 </th>
                 <td>
-                    <select class="" name="category" id="priority">
-                        <option value="local">Local</option>
-                        <option value="international" selected="selected">International</option>
-                        <option value="regional">Regional</option>
-                        <option value="vip">Vip</option>                       
-                        <option value="others">Others</option>                        
+                    <select class="" name="category" id="category">
+                        <option value="Local">Local</option>
+                        <option value="International" selected="selected">International</option>
+                        <option value="Regional">Regional</option>
+                        <option value="Vip">Vip</option>                       
+                        <option value="Others">Others</option>                        
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="status"><?php _e('Status','domain-manager') ?></label>
+                </th>
+                <td>
+                    <select class="" name="status" id="status">
+                        <option value="Free" selected="selected">Free</option>
+                        <option value="Parked">Parked</option>
+                        <option value="Taken">Taken</option>
+                        <option value="Other">Other</option>                      
                     </select>
                 </td>
             </tr>
